@@ -12,22 +12,19 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(morgan('dev'));
 app.use(cors());
+
+// Middleware
+app.use(morgan('dev'));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-// const userApiRoutes = require('./routes/users-api');
-// const resourceApiRoutes = require('./routes/resources-api');
+const taskApiRoutes = require('./routes/tasks-api');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
-// app.use('/api/users', userApiRoutes);
-// app.use('/api/resources', resourceApiRoutes);
+app.use('/api/tasks', taskApiRoutes);
 
-app.get("/", (req, res) => {
-  res.send('Hello, World!');
-});
-
+// Listener
 app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
